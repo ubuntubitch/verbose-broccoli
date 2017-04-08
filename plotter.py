@@ -32,14 +32,17 @@ def plot_velocity_profiles(loc):
     ax1.set_ylabel('Depth (%s)' % velocity_profile['depth']['units'], fontsize='large')
     ax1.set_xlabel('S-Wave V. (%s)' % velocity_profile['vs']['units'], fontsize='large')
     ax1.step(vs, depth, 'bo')
+    ax1.set_xscale('log')
     ax1.xaxis.set_tick_params(labelsize=7)
     ax1.yaxis.set_tick_params(labelsize=7)
 
     ax2.set_xlabel('P-Wave V. (%s)' % velocity_profile['vp']['units'], fontsize='large')
     ax2.step(vp, depth, 'ro')
+    ax2.set_xscale('log')
     ax2.xaxis.set_tick_params(labelsize=7)
     ax2.yaxis.set_tick_params(labelsize=7)
 
+    fig.set_size_inches(10, 7, forward=True)
     fig.savefig('%s.png' % tag)
 
 
@@ -60,11 +63,14 @@ def plot_dispersion_data(loc):
     ax.plot(freq, tdv, label='Field Ave. Velocity (m/s)')
     ax.plot(freq, sdv, 'm-', label='Inverted Phase Velocity (m/s)')
     ax.plot(freq, sdv, 'k_')
+    ax.set_xscale('log')
     ax.legend(loc='upper right')
     ax.set_xlabel('Frequency (Hz)', fontsize='large')
     ax.set_ylabel('Phase Velocity (m/s)', fontsize='large')
     ax.xaxis.set_tick_params(labelsize=7)
     ax.yaxis.set_tick_params(labelsize=7)
+
+    fig.set_size_inches(10, 7, forward=True)
     fig.savefig('%s.png' % tag)
 
 
@@ -81,17 +87,19 @@ def plot_lab_test(loc):
         return
 
     fig = plt.figure()
-    ax = fig.add_subplot(121)
-    ax.plot(grain_size_dist, portion_finer)
-    ax.set_xlabel('Grain Size (mm)', fontsize='large')
-    ax.set_ylabel('Portion Finer (%)', fontsize='large')
-    ax.xaxis.set_tick_params(labelsize=7)
-    ax.yaxis.set_tick_params(labelsize=7)
+    ax1 = fig.add_subplot(121)
+    ax1.plot(grain_size_dist, portion_finer)
+    ax1.set_xlabel('Grain Size (mm)', fontsize='large')
+    ax1.set_ylabel('Portion Finer (%)', fontsize='large')
+    ax1.set_xscale('log')
+    ax1.xaxis.set_tick_params(labelsize=7)
+    ax1.yaxis.set_tick_params(labelsize=7)
 
     # nonlinearTest
     ax2 = fig.add_subplot(222)
     ax2.xaxis.set_tick_params(labelsize=7)
     ax2.yaxis.set_tick_params(labelsize=7)
+    ax2.set_xscale('log')
     ax2.set_xlabel('Cyclic Shear Strain')
     ax2.set_ylabel('G/Gmax')
     ax2.grid(True)
@@ -99,8 +107,9 @@ def plot_lab_test(loc):
     ax3 = fig.add_subplot(224)
     ax3.xaxis.set_tick_params(labelsize=7)
     ax3.yaxis.set_tick_params(labelsize=7)
-    ax2.set_xlabel('Cyclic Shear Strain')
-    ax2.set_ylabel('Damping Ratio, %')
+    ax3.set_xscale('log')
+    ax3.set_xlabel('Cyclic Shear Strain')
+    ax3.set_ylabel('Damping Ratio, %')
     ax3.grid(True)
 
     for prop in lab_test['children']['nonlinearTest']:
@@ -115,6 +124,7 @@ def plot_lab_test(loc):
 
         ax.plot(strain, property_)
 
+    fig.set_size_inches(10, 7, forward=True)
     fig.savefig('%s.png' % tag)
 
 
@@ -137,31 +147,39 @@ def plot_field_test(loc):
         return
 
     fig, (ax1, ax2, ax3, ax4) = plt.subplots(ncols=4)
-    fig.set_size_inches(8, 5, forward=True)
 
     ax1.plot(blow_count, depth_1)
     ax1.set_xlabel('SPT', fontsize='10')
     ax1.xaxis.set_label_position('top')
     ax1.xaxis.set_tick_params(labelsize=7)
+    ax1.yaxis.set_tick_params(labelsize=7)
+    ax1.set_xscale('log')
 
     ax2.plot(tip_resistance, depth_2, 'r-')
     ax2.set_xlabel('Tip Resistance (kPa)', fontsize='10')
     ax2.xaxis.set_label_position('top')
     ax2.xaxis.set_tick_params(labelsize=7)
+    ax2.yaxis.set_tick_params(labelsize=7)
+    ax2.set_xscale('log')
     ax2.grid(True)
 
     ax3.plot(sleeve_friction, depth_2, 'r-')
     ax3.set_xlabel('Sleeve Friction (kPa)', fontsize='10')
     ax3.xaxis.set_label_position('top')
     ax3.xaxis.set_tick_params(labelsize=7)
+    ax3.yaxis.set_tick_params(labelsize=7)
+    ax3.set_xscale('log')
     ax3.grid(True)
 
     ax4.plot(pore_pressure, depth_2, 'r-')
     ax4.set_xlabel('Pore Pressure (kPa)', fontsize='10')
     ax4.xaxis.set_label_position('top')
     ax4.xaxis.set_tick_params(labelsize=7)
+    ax4.yaxis.set_tick_params(labelsize=7)
+    ax4.set_xscale('log')
     ax4.grid(True)
 
+    fig.set_size_inches(10, 7, forward=True)
     fig.savefig('%s.png' % tag)
 
 
