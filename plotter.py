@@ -16,7 +16,7 @@ def _has_empty_sets(*args):
 
 
 def plot_velocity_profiles(loc):
-    tag = '%s_velocityProfile' % loc['name']
+    tag = '%s_%s_velocityProfile' % (loc['name'], loc.get('Geotechnical Category(GMX)', ''))
     print tag
 
     velocity_profile = loc['children']['velocityProfile'][0]
@@ -47,7 +47,7 @@ def plot_velocity_profiles(loc):
 
 
 def plot_dispersion_data(loc):
-    tag = '%s_dispersionData' % loc['name']
+    tag = '%s_%s_dispersionData' % (loc['name'], loc.get('Geotechnical Category(GMX)', ''))
     print tag
 
     dispersion_data = loc['children']['dispersionData'][0]
@@ -75,7 +75,7 @@ def plot_dispersion_data(loc):
 
 
 def plot_lab_test(loc):
-    tag = '%s_labTest' % loc['name']
+    tag = '%s_%s_labTest' % (loc['name'], loc.get('Geotechnical Category(GMX)', ''))
     print tag
 
     lab_test = loc['children']['geotechnicalData'][0]['children']['labTest'][0]
@@ -129,7 +129,7 @@ def plot_lab_test(loc):
 
 
 def plot_field_test(loc):
-    tag = '%s_fieldTest' % loc['name']
+    tag = '%s_%s_fieldTest' % (loc['name'], loc.get('Geotechnical Category(GMX)', ''))
     print tag
 
     lab_test = loc['children']['geotechnicalData'][0]['children']['fieldTest'][0]
